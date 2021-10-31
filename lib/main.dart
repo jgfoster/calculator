@@ -35,7 +35,6 @@ class _MyHomePageState extends State<MyHomePage> {
   var _line2 = '';
   var _line3 = '';
   var _line4 = '0';
-  var _isAppend = true;
   var _enterMode = #replace;
   var _op2 = '';
   var _op3 = '';
@@ -263,34 +262,33 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Radio(
-                  value: false,
-                  groupValue: _isRPN,
-                  onChanged: (var value) {
-                    setState(() {
-                      _isRPN = false;
-                      var rows = _keys.length;
-                      var cols = _keys[rows - 1].length;
-                      _keys[rows - 1][cols - 1] = ['=', () => _equals()];
-                      _allClear();
-                    });
-                  }
-                ),
+                    value: false,
+                    groupValue: _isRPN,
+                    onChanged: (var value) {
+                      setState(() {
+                        _isRPN = false;
+                        var rows = _keys.length;
+                        var cols = _keys[rows - 1].length;
+                        _keys[rows - 1][cols - 1] = ['=', () => _equals()];
+                        _allClear();
+                      });
+                    }),
                 const Text('Infix'),
                 Radio(
-                  value: true,
-                  groupValue: _isRPN,
-                  onChanged: (var value) {
-                    setState(() {
-                      _isRPN = true;
-                      var rows = _keys.length;
-                      var cols = _keys[rows - 1].length;
-                      _keys[rows - 1][cols - 1] = ['Enter', () => _enter()];
-                      _allClear();
-                    });
-                  }
-                ),
+                    value: true,
+                    groupValue: _isRPN,
+                    onChanged: (var value) {
+                      setState(() {
+                        _isRPN = true;
+                        var rows = _keys.length;
+                        var cols = _keys[rows - 1].length;
+                        _keys[rows - 1][cols - 1] = ['Enter', () => _enter()];
+                        _allClear();
+                      });
+                    }),
                 const Text('RPN'),
-            ]),
+              ],
+            ),
             Text(_line1 + ' '),
             Text(_line2 + ' ' + _op2),
             Text(_line3 + ' ' + _op3),
@@ -298,16 +296,17 @@ class _MyHomePageState extends State<MyHomePage> {
               _line4,
               style: Theme.of(context).textTheme.headline4,
             ),
-            for (var row in _keys) Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                for (var pair in row)
-                  OutlinedButton(
-                    onPressed: pair[1],
-                    child: Text(pair[0]),
-                  )
-              ],
-            ),
+            for (var row in _keys)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  for (var pair in row)
+                    OutlinedButton(
+                      onPressed: pair[1],
+                      child: Text(pair[0]),
+                    )
+                ],
+              ),
           ],
         ),
       ),
